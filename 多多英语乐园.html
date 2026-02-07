@@ -1,0 +1,2709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵 多多英语乐园 - Super Simple Songs 0-3岁启蒙</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sps-blue: #1E90FF;
+            --sps-dark-blue: #104E8B;
+            --sps-yellow: #FFD93D;
+            --sps-orange: #FF6B35;
+            --sps-green: #6BCB77;
+            --sps-pink: #FF6B9D;
+            --sps-purple: #9B59B6;
+            --bg-light: #FFF9F0;
+            --bg-gradient: linear-gradient(135deg, #FFE9F0 0%, #E8F6FF 50%, #F0FFF0 100%);
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'PingFang SC', cursive, sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Floating Background */
+        .bg-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-element {
+            position: absolute;
+            font-size: 35px;
+            opacity: 0.12;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(10deg); }
+        }
+
+        /* Header with DuoDuo Character */
+        .header {
+            background: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 50%, #E0C3FC 100%);
+            color: white;
+            padding: 12px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '🌈';
+            position: absolute;
+            bottom: -30px;
+            right: -10px;
+            font-size: 150px;
+            opacity: 0.08;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* DuoDuo Character - Cute Kid Style */
+        .duoduo-container {
+            width: 100px;
+            height: 100px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .duoduo {
+            width: 95px;
+            height: 95px;
+            position: relative;
+            animation: bounce 1.5s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.02); }
+        }
+
+        /* DuoDuo's Hair */
+        .duoduo-hair {
+            width: 80px;
+            height: 35px;
+            background: linear-gradient(180deg, #8B4513, #654321);
+            border-radius: 50px 50px 20px 20px;
+            position: absolute;
+            top: 5px;
+            left: 7px;
+            z-index: 4;
+        }
+
+        .duoduo-hair::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 10px;
+            width: 15px;
+            height: 15px;
+            background: #8B4513;
+            border-radius: 50%;
+        }
+
+        .duoduo-hair::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: 15px;
+            width: 12px;
+            height: 12px;
+            background: #8B4513;
+            border-radius: 50%;
+        }
+
+        /* DuoDuo's Blue Hat - Special Style */
+        .duoduo-hat {
+            width: 55px;
+            height: 25px;
+            background: linear-gradient(180deg, #4FC3F7, #29B6F6);
+            border-radius: 55px 55px 0 0;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .duoduo-hat::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 65px;
+            height: 12px;
+            background: linear-gradient(90deg, #29B6F6, #4FC3F7, #29B6F6);
+            border-radius: 6px;
+        }
+
+        /* DuoDuo's Hat Decoration */
+        .duoduo-hat::before {
+            content: '⭐';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+        }
+
+        /* DuoDuo's Head - Pinkish skin */
+        .duoduo-head {
+            width: 75px;
+            height: 70px;
+            background: linear-gradient(145deg, #FFE0B2, #FFCC80);
+            border-radius: 50%;
+            position: absolute;
+            top: 18px;
+            left: 10px;
+            z-index: 2;
+            box-shadow: inset -2px -2px 5px rgba(0,0,0,0.05);
+        }
+
+        /* Eyes - Big and cute */
+        .duoduo-eyes {
+            position: absolute;
+            top: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+        }
+
+        .duoduo-eye {
+            width: 12px;
+            height: 14px;
+            background: #333;
+            border-radius: 50%;
+            position: relative;
+            animation: blink 4s infinite;
+        }
+
+        @keyframes blink {
+            0%, 45%, 55%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.1); }
+        }
+
+        .duoduo-eye::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        /* Eyebrows */
+        .duoduo-eyebrow {
+            position: absolute;
+            top: 22px;
+            width: 12px;
+            height: 3px;
+            background: #8B4513;
+            border-radius: 2px;
+        }
+
+        .duoduo-eyebrow.left {
+            left: 24px;
+            transform: rotate(-10deg);
+        }
+
+        .duoduo-eyebrow.right {
+            right: 24px;
+            transform: rotate(10deg);
+        }
+
+        /* Rosy Cheeks */
+        .duoduo-cheeks {
+            position: absolute;
+            top: 42px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 5px;
+        }
+
+        .duoduo-cheek {
+            width: 14px;
+            height: 8px;
+            background: linear-gradient(135deg, #FFAB91, #FF8A65);
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+
+        /* Big Smile */
+        .duoduo-mouth {
+            width: 24px;
+            height: 14px;
+            border-bottom: 4px solid #333;
+            border-radius: 0 0 24px 24px;
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FF7043;
+        }
+
+        /* Blue Overalls - DuoDuo Style */
+        .duoduo-body {
+            width: 85px;
+            height: 30px;
+            background: linear-gradient(180deg, #42A5F5, #1976D2);
+            border-radius: 10px;
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+            z-index: 1;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+
+        /* Suspenders */
+        .duoduo-suspender {
+            width: 12px;
+            height: 25px;
+            background: linear-gradient(180deg, #42A5F5, #1976D2);
+            position: absolute;
+            top: -15px;
+        }
+
+        .duoduo-suspender.left {
+            left: 18px;
+            transform: rotate(-8deg);
+        }
+
+        .duoduo-suspender.right {
+            right: 18px;
+            transform: rotate(8deg);
+        }
+
+        /* Yellow Shirt */
+        .duoduo-shirt {
+            width: 55px;
+            height: 18px;
+            background: linear-gradient(145deg, #FFE082, #FFD54F);
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+            z-index: 0;
+        }
+
+        /* Little Bow Tie */
+        .duoduo-bow {
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 6;
+        }
+
+        .duoduo-bow::before,
+        .duoduo-bow::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 8px;
+            background: #FF5252;
+            border-radius: 3px;
+        }
+
+        .duoduo-bow::before {
+            left: -10px;
+            transform: rotate(-15deg);
+        }
+
+        .duoduo-bow::after {
+            right: -10px;
+            transform: rotate(15deg);
+        }
+
+        .duoduo-bow-center {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #D32F2F;
+            border-radius: 50%;
+            left: -3px;
+            top: 1px;
+        }
+
+        /* Logo Text */
+        .logo-text {
+            text-align: left;
+        }
+
+        .logo-text h1 {
+            font-size: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin-bottom: 3px;
+        }
+
+        .logo-text p {
+            font-size: 13px;
+            opacity: 0.95;
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            flex-wrap: wrap;
+            background: white;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+        }
+
+        .nav-btn {
+            padding: 10px 18px;
+            border-radius: 20px;
+            border: none;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .nav-btn.active {
+            transform: scale(1.05);
+        }
+
+        .nav-btn:nth-child(1) { background: var(--sps-orange); color: white; }
+        .nav-btn:nth-child(2) { background: var(--sps-blue); color: white; }
+        .nav-btn:nth-child(3) { background: var(--sps-green); color: white; }
+        .nav-btn:nth-child(4) { background: var(--sps-yellow); color: #333; }
+        .nav-btn:nth-child(5) { background: var(--sps-pink); color: white; }
+
+        /* Main Content */
+        .main {
+            padding: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Carl Banner for 0-3 years */
+        .duoduo-banner {
+            background: linear-gradient(135deg, var(--sps-blue) 0%, #5DADE2 100%);
+            border-radius: 25px;
+            padding: 20px 25px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 8px 30px rgba(30, 144, 255, 0.25);
+        }
+
+        .duoduo-banner .duoduo {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+        }
+
+        .banner-content {
+            flex: 1;
+            color: white;
+        }
+
+        .banner-content h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .banner-content p {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+
+        /* Baby Cards - Larger for touch */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 22px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--sps-orange), var(--sps-blue), var(--sps-yellow));
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+        }
+
+        .card-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .card-en {
+            font-size: 14px;
+            color: var(--sps-purple);
+            font-weight: bold;
+        }
+
+        /* Video Section */
+        .section-title {
+            font-size: 22px;
+            text-align: center;
+            margin: 25px 0 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .section-title::before,
+        .section-title::after {
+            content: '★';
+            font-size: 18px;
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 18px;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border-radius: 18px;
+            border: 2px solid var(--sps-blue);
+            background: white;
+            color: var(--sps-blue);
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--sps-blue);
+            color: white;
+        }
+
+        /* Baby-friendly Videos */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 18px;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+        }
+
+        .video-thumb {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 65px;
+            position: relative;
+        }
+
+        .play-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .video-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .play-btn {
+            width: 55px;
+            height: 55px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+
+        .video-card:hover .play-btn {
+            transform: scale(1);
+        }
+
+        .video-info {
+            padding: 15px;
+        }
+
+        .video-title {
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .video-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .video-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 4px 10px;
+            background: var(--bg-light);
+            border-radius: 12px;
+            font-size: 11px;
+            color: var(--sps-blue);
+        }
+
+        /* Dialogue Section */
+        .dialogue-container {
+            background: white;
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .dialogue-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 3px dashed var(--sps-yellow);
+        }
+
+        .dialogue-avatar {
+            width: 55px;
+            height: 55px;
+        }
+
+        .dialogue-title h3 {
+            font-size: 18px;
+        }
+
+        .dialogue-title p {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .dialogue-messages {
+            min-height: 250px;
+            max-height: 350px;
+            overflow-y: auto;
+            padding: 15px;
+            background: var(--bg-light);
+            border-radius: 18px;
+            margin-bottom: 15px;
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .message.ai {
+            flex-direction: row;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .message.ai .message-avatar {
+            background: var(--sps-blue);
+        }
+
+        .message.user .message-avatar {
+            background: var(--sps-yellow);
+        }
+
+        .message-content {
+            max-width: 78%;
+        }
+
+        .message-text {
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .message.ai .message-text {
+            background: linear-gradient(135deg, var(--sps-blue), #5DADE2);
+            color: white;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.user .message-text {
+            background: var(--sps-yellow);
+            color: #333;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message-image {
+            margin-top: 10px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .message-img {
+            width: 55px;
+            height: 55px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .message-img:hover {
+            transform: scale(1.1);
+        }
+
+        .message-img span {
+            font-size: 9px;
+            color: var(--sps-blue);
+            font-weight: bold;
+        }
+
+        /* Visual Cards for Dialogue */
+        .visual-cards {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .visual-card {
+            width: 90px;
+            background: white;
+            border-radius: 12px;
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .visual-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .visual-card .emoji {
+            font-size: 36px;
+            margin-bottom: 5px;
+        }
+
+        .visual-card .word {
+            font-size: 11px;
+            font-weight: bold;
+            color: var(--sps-blue);
+        }
+
+        .visual-card .label {
+            font-size: 9px;
+            color: #888;
+        }
+
+        /* Video Card in Dialogue */
+        .video-recommend {
+            margin-top: 12px;
+            background: linear-gradient(135deg, #FF6B6B, #FFD93D);
+            border-radius: 12px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .video-recommend:hover {
+            transform: scale(1.02);
+        }
+
+        .video-recommend .thumb {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .video-recommend .info {
+            flex: 1;
+            color: white;
+        }
+
+        .video-recommend .title {
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .video-recommend .desc {
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        .video-recommend .play-icon {
+            width: 35px;
+            height: 35px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .voice-btn {
+            background: rgba(255,255,255,0.25);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            cursor: pointer;
+            margin-top: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: white;
+        }
+
+        /* Quick Replies - Larger for baby touch */
+        .quick-replies {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .quick-btn {
+            padding: 10px 16px;
+            background: linear-gradient(135deg, var(--sps-orange), #FF8C42);
+            color: white;
+            border: none;
+            border-radius: 18px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quick-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 14px 20px;
+            border-radius: 22px;
+            border: 2px solid #eee;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .input-area input:focus {
+            border-color: var(--sps-blue);
+        }
+
+        .send-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--sps-orange), #FF8C42);
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Progress Section */
+        .progress-container {
+            background: white;
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .progress-title h3 {
+            font-size: 20px;
+        }
+
+        .stars-container {
+            display: flex;
+            gap: 5px;
+        }
+
+        .star {
+            font-size: 26px;
+            color: #ddd;
+            transition: all 0.3s;
+        }
+
+        .star.filled {
+            color: var(--sps-yellow);
+            transform: scale(1.1);
+        }
+
+        .progress-bar-container {
+            background: #f0f0f0;
+            border-radius: 12px;
+            height: 20px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--sps-blue), var(--sps-green));
+            border-radius: 12px;
+            transition: width 1s ease;
+        }
+
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: 18px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 26px;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--sps-pink), var(--sps-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* Category Progress */
+        .category-progress {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+        }
+
+        .cat-card {
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cat-icon {
+            font-size: 32px;
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cat-info {
+            flex: 1;
+        }
+
+        .cat-name {
+            font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .cat-bar {
+            background: #ddd;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .cat-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        .cat-fill.easy { background: var(--sps-green); }
+        .cat-fill.medium { background: var(--sps-yellow); }
+        .cat-fill.hard { background: var(--sps-orange); }
+
+        .cat-percent {
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--sps-blue);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo-text {
+                text-align: center;
+            }
+
+            .duoduo-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .progress-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 28px;
+            padding: 25px;
+            max-width: 420px;
+            width: 92%;
+            text-align: center;
+            animation: modalIn 0.4s ease;
+        }
+
+        .modal-video {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .modal-video iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+        }
+
+        @keyframes modalIn {
+            from { transform: scale(0.85); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-image {
+            font-size: 90px;
+            margin-bottom: 15px;
+        }
+
+        .modal-word-en {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--sps-blue);
+            margin-bottom: 8px;
+        }
+
+        .modal-word-cn {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .modal-phonetic {
+            font-size: 16px;
+            color: #999;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .speak-btn {
+            background: linear-gradient(135deg, var(--sps-blue), #5DADE2);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 28px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .speak-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .modal-close {
+            margin-top: 15px;
+            padding: 10px 25px;
+            background: #f5f5f5;
+            color: #666;
+            border: none;
+            border-radius: 18px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        /* Celebration */
+        .celebration {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2000;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            animation: confettiFall 2.5s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-80px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(540deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background -->
+    <div class="bg-elements">
+        <div class="bg-element" style="top: 15%; left: 8%; animation-delay: 0s;">⭐</div>
+        <div class="bg-element" style="top: 65%; left: 88%; animation-delay: 1s;">🎵</div>
+        <div class="bg-element" style="top: 35%; left: 85%; animation-delay: 2s;">🌟</div>
+        <div class="bg-element" style="top: 75%; left: 12%; animation-delay: 0.7s;">🎶</div>
+        <div class="bg-element" style="top: 20%; left: 55%; animation-delay: 1.5s;">✨</div>
+    </div>
+
+    <!-- Header with Authentic Carl -->
+    <header class="header">
+        <div class="header-content">
+            <div class="duoduo-container">
+                <div class="duoduo">
+                    <!-- Authentic SPS Blue Hat -->
+                    <div class="duoduo-hat"></div>
+                    <!-- Yellow Head -->
+                    <div class="duoduo-head">
+                        <div class="duoduo-eyes">
+                            <div class="duoduo-eye"></div>
+                            <div class="duoduo-eye"></div>
+                        </div>
+                        <div class="duoduo-cheeks">
+                            <div class="duoduo-cheek"></div>
+                            <div class="duoduo-cheek"></div>
+                        </div>
+                        <div class="duoduo-mouth"></div>
+                    </div>
+                    <!-- Suspenders -->
+                    <div class="duoduo-suspender left"></div>
+                    <div class="duoduo-suspender right"></div>
+                    <!-- Blue Overalls -->
+                    <div class="duoduo-body"></div>
+                    <!-- Yellow Shirt -->
+                    <div class="duoduo-shirt"></div>
+                </div>
+            </div>
+            <div class="logo-text">
+                <h1>🎵 多多英语乐园</h1>
+                <p>Super Simple Songs · 0-3岁英语启蒙</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <button class="nav-btn active" onclick="showTab('words')">📚 单词</button>
+        <button class="nav-btn" onclick="showTab('videos')">🎬 动画</button>
+        <button class="nav-btn" onclick="showTab('dialogue')">💬 对话</button>
+        <button class="nav-btn" onclick="showTab('songs')">🎵 歌曲</button>
+        <button class="nav-btn" onclick="showTab('addword')">➕ 添加</button>
+        <button class="nav-btn" onclick="showTab('progress')">🏆 成就</button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Words Tab -->
+        <div class="tab-content active" id="words">
+            <!-- Carl Banner -->
+            <div class="duoduo-banner">
+                <div class="duoduo">
+                    <div class="duoduo-hat"></div>
+                    <div class="duoduo-head">
+                        <div class="duoduo-eyes">
+                            <div class="duoduo-eye"></div>
+                            <div class="duoduo-eye"></div>
+                        </div>
+                        <div class="duoduo-cheeks">
+                            <div class="duoduo-cheek"></div>
+                            <div class="duoduo-cheek"></div>
+                        </div>
+                        <div class="duoduo-mouth"></div>
+                    </div>
+                    <div class="duoduo-suspender left"></div>
+                    <div class="duoduo-suspender right"></div>
+                    <div class="duoduo-body"></div>
+                    <div class="duoduo-shirt"></div>
+                </div>
+                <div class="banner-content">
+                    <h3>👶 和 Carl 学单词</h3>
+                    <p>点击卡片，听 Carl 读单词！简单又有趣！</p>
+                </div>
+            </div>
+
+            <div class="section-title">🌟 最基础词汇（0-3岁）</div>
+
+            <div class="cards-grid">
+                <!-- Very Basic Words for Babies -->
+                <div class="card" onclick="showWord('mommy', '妈妈', '👩', '/ˈmɒmi/')">
+                    <span class="card-icon">👩</span>
+                    <div class="card-title">妈妈</div>
+                    <div class="card-en">Mommy</div>
+                </div>
+
+                <div class="card" onclick="showWord('daddy', '爸爸', '👨', '/ˈdædi/')">
+                    <span class="card-icon">👨</span>
+                    <div class="card-title">爸爸</div>
+                    <div class="card-en">Daddy</div>
+                </div>
+
+                <div class="card" onclick="showWord('baby', '宝宝', '👶', '/ˈbeɪbi/')">
+                    <span class="card-icon">👶</span>
+                    <div class="card-title">宝宝</div>
+                    <div class="card-en">Baby</div>
+                </div>
+
+                <div class="card" onclick="showWord('milk', '奶奶/牛奶', '🥛', '/mɪlk/')">
+                    <span class="card-icon">🥛</span>
+                    <div class="card-title">奶奶</div>
+                    <div class="card-en">Milk</div>
+                </div>
+
+                <div class="card" onclick="showWord('apple', '苹果', '🍎', '/ˈæp.əl/')">
+                    <span class="card-icon">🍎</span>
+                    <div class="card-title">苹果</div>
+                    <div class="card-en">Apple</div>
+                </div>
+
+                <div class="card" onclick="showWord('dog', '狗狗', '🐶', '/dɒɡ/')">
+                    <span class="card-icon">🐶</span>
+                    <div class="card-title">狗狗</div>
+                    <div class="card-en">Dog</div>
+                </div>
+
+                <div class="card" onclick="showWord('cat', '猫咪', '🐱', '/kæt/')">
+                    <span class="card-icon">🐱</span>
+                    <div class="card-title">猫咪</div>
+                    <div class="card-en">Cat</div>
+                </div>
+
+                <div class="card" onclick="showWord('hello', '你好', '👋', '/həˈləʊ/')">
+                    <span class="card-icon">👋</span>
+                    <div class="card-title">你好</div>
+                    <div class="card-en">Hello</div>
+                </div>
+
+                <div class="card" onclick="showWord('bye bye', '再见', '👋', '/baɪ baɪ/')">
+                    <span class="card-icon">👋</span>
+                    <div class="card-title">再见</div>
+                    <div class="card-en">Bye Bye</div>
+                </div>
+
+                <div class="card" onclick="showWord('yes', '是的', '👍', '/jes/')">
+                    <span class="card-icon">👍</span>
+                    <div class="card-title">是的</div>
+                    <div class="card-en">Yes</div>
+                </div>
+
+                <div class="card" onclick="showWord('no', '不要', '✋', '/nəʊ/')">
+                    <span class="card-icon">✋</span>
+                    <div class="card-title">不要</div>
+                    <div class="card-en">No</div>
+                </div>
+
+                <div class="card" onclick="showWord('ball', '球', '⚽', '/bɔːl/')">
+                    <span class="card-icon">⚽</span>
+                    <div class="card-title">球</div>
+                    <div class="card-en">Ball</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Videos Tab - Super Simple Songs -->
+        <div class="tab-content" id="videos">
+            <div class="section-title">🎬 Super Simple Songs 动画</div>
+
+            <div class="filter-bar">
+                <button class="filter-btn active">全部</button>
+                <button class="filter-btn">🐤 动物</button>
+                <button class="filter-btn">🎵 动作</button>
+                <button class="filter-btn">👋 问候</button>
+                <button class="filter-btn">🌙 睡前</button>
+                <button class="filter-btn">🎨 颜色</button>
+            </div>
+
+            <div class="video-grid">
+                <!-- Authentic Super Simple Songs -->
+                <div class="video-card" onclick="playVideo('🦁 The Lion Song 狮子之歌', 'https://www.youtube.com/embed/g3t2fDn4_aQ')">
+                    <div class="video-thumb" style="background: linear-gradient(135deg, #FFD93D, #FF6B6B);">
+                        🦁
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">🦁 The Lion Song 狮子之歌</div>
+                        <div class="video-meta">
+                            <span>⏱️ 3:15</span>
+                            <span>📊 入门</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">动物</span>
+                            <span class="tag">动作</span>
+                            <span class="tag">经典</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideo('🐛 The Butterfly 蝴蝶歌', 'https://www.youtube.com/embed/x_q4cKjd_0Y')">
+                    <div class="video-thumb" style="background: linear-gradient(135deg, #4ECDC4, #55EFC4);">
+                        🐛
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">🐛 The Butterfly 蝴蝶歌</div>
+                        <div class="video-meta">
+                            <span>⏱️ 3:30</span>
+                            <span>📊 入门</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">动物</span>
+                            <span class="tag">生命周期</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideo('🛁 Bath Song 洗澡歌', 'https://www.youtube.com/embed/o1bLqkL2eGw')">
+                    <div class="video-thumb" style="background: linear-gradient(135deg, #A29BFE, #FF6B6B);">
+                        🛁
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">🛁 Bath Song 洗澡歌</div>
+                        <div class="video-meta">
+                            <span>⏱️ 3:45</span>
+                            <span>📊 入门</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">日常</span>
+                            <span class="tag">动作</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideo('🌙 Good Night 晚安歌', 'https://www.youtube.com/embed/h5p-lM6c1jQ')">
+                    <div class="video-thumb" style="background: linear-gradient(135deg, #74B9FF, #A29BFE);">
+                        🌙
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">🌙 Good Night 晚安歌</div>
+                        <div class="video-meta">
+                            <span>⏱️ 3:00</span>
+                            <span>📊 入门</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">睡前</span>
+                            <span class="tag">温柔</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideo('🎃 Head Shoulders 身体部位', 'https://www.youtube.com/embed/0LT4W16lB_g')">
+                    <div class="video-thumb" style="background: linear-gradient(135deg, #FF6B6B, #FFD93D);">
+                        🎃
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">🎃 Head Shoulders 身体部位</div>
+                        <div class="video-meta">
+                            <span>⏱️ 2:30</span>
+                            <span>📊 入门</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">身体</span>
+                            <span class="tag">动作</span>
+                            <span class="tag">经典</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideo('🎵 If You\'re Happy 幸福歌', 'https://www.youtube.com/embed/oX6D1uT9k9k')">
+                    <div class="video-thumb" style="background: linear-gradient(135deg, #55EFC4, #4ECDC4);">
+                        🎵
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">🎵 If You're Happy 幸福歌</div>
+                        <div class="video-meta">
+                            <span>⏱️ 2:45</span>
+                            <span>📊 入门</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">情绪</span>
+                            <span class="tag">动作</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideo('🐠 The Fish Song 小鱼歌', 'https://www.youtube.com/embed/JB2iVwGC9bQ')">
+                    <div class="video-thumb" style="background: linear-gradient(135deg, #FD79A8, #A29BFE);">
+                        🐠
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">🐠 The Fish Song 小鱼歌</div>
+                        <div class="video-meta">
+                            <span>⏱️ 2:15</span>
+                            <span>📊 入门</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">动物</span>
+                            <span class="tag">水中</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideo('☀️ Morning Song 早安歌', 'https://www.youtube.com/embed/c2v1pVdFWIY')">
+                    <div class="video-thumb" style="background: linear-gradient(135deg, #00CEC9, #55EFC4);">
+                        ☀️
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">☀️ Morning Song 早安歌</div>
+                        <div class="video-meta">
+                            <span>⏱️ 2:00</span>
+                            <span>📊 入门</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">早晨</span>
+                            <span class="tag">日常</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Songs Tab - Classic SPS Songs -->
+        <div class="tab-content" id="songs">
+            <div class="section-title">🎵 经典儿歌精选</div>
+
+            <div class="filter-bar">
+                <button class="filter-btn active">全部</button>
+                <button class="filter-btn">🎶 律动</button>
+                <button class="filter-btn">🔢 数字</button>
+                <button class="filter-btn">🔤 字母</button>
+                <button class="filter-btn">🎭 角色</button>
+            </div>
+
+            <div class="video-grid">
+                <div class="video-card" onclick="playVideo('🔢 Five Little Ducks 五只小鸭', 'https://www.youtube.com/embed/pP8l1r2e1kQ')">
+                    <div class="video-thumb" style="background: linear-gradient(135deg, #E17055, #FF6B6B);">
+                        🔢
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">🔢 Five Little Ducks 五只小鸭</div>
+                        <div class="video-meta">
+                            <span>⏱️ 3:20</span>
+                            <span>📊 入门</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">数字</span>
+                            <span class="tag">动物</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideo('🔤 ABC Song 字母歌', 'https://www.youtube.com/embed/0VkuXAEkybk')">
+                    <div class="video-thumb" style="background: linear-gradient(135deg, #6C5CE7, #A29BFE);">
+                        🔤
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">🔤 ABC Song 字母歌</div>
+                        <div class="video-meta">
+                            <span>⏱️ 2:45</span>
+                            <span>📊 入门</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">字母</span>
+                            <span class="tag">经典</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideo('🕷️ The Itsy Bitsy Spider 蜘蛛歌', 'https://www.youtube.com/embed/0VkuXAEkybk')">
+                    <div class="video-thumb" style="background: linear-gradient(135deg, #00B894, #55EFC4);">
+                        🕷️
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">🕷️ The Itsy Bitsy Spider 蜘蛛歌</div>
+                        <div class="video-meta">
+                            <span>⏱️ 2:30</span>
+                            <span>📊 入门</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">经典</span>
+                            <span class="tag">动物</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideo('🌈 Colors 颜色歌', 'https://www.youtube.com/embed/2Y3KqZ2n5NQ')">
+                    <div class="video-thumb" style="background: linear-gradient(135deg, #FDCB6E, #FFE66D);">
+                        🌈
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">🌈 Colors 颜色歌</div>
+                        <div class="video-meta">
+                            <span>⏱️ 3:00</span>
+                            <span>📊 入门</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">颜色</span>
+                            <span class="tag">视觉</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideo('🐮 Old McDonald 麦克唐纳', 'https://www.youtube.com/embed/L3oOldViIgY')">
+                    <div class="video-thumb" style="background: linear-gradient(135deg, #FF7675, #D63031);">
+                        🐮
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">🐮 Old McDonald 麦克唐纳</div>
+                        <div class="video-meta">
+                            <span>⏱️ 3:45</span>
+                            <span>📊 入门</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">动物</span>
+                            <span class="tag">经典</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card" onclick="playVideo('🚂 The Train Song 火车歌', 'https://www.youtube.com/embed/j1L4G5e1qJU')">
+                    <div class="video-thumb" style="background: linear-gradient(135deg, #74B9FF, #0984E3);">
+                        🚂
+                        <div class="play-overlay">
+                            <div class="play-btn">▶</div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">🚂 The Train Song 火车歌</div>
+                        <div class="video-meta">
+                            <span>⏱️ 2:45</span>
+                            <span>📊 入门</span>
+                        </div>
+                        <div class="video-tags">
+                            <span class="tag">交通工具</span>
+                            <span class="tag">声音</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Word Tab -->
+        <div class="tab-content" id="addword">
+            <div class="section-title">➕ 添加新单词</div>
+
+            <div class="dialogue-container">
+                <div class="dialogue-header">
+                    <div class="dialogue-avatar">
+                        <div class="duoduo" style="width: 100%; height: 100%;">
+                            <div class="duoduo-hat"></div>
+                            <div class="duoduo-head">
+                                <div class="duoduo-eyes">
+                                    <div class="duoduo-eye"></div>
+                                    <div class="duoduo-eye"></div>
+                                </div>
+                                <div class="duoduo-cheeks">
+                                    <div class="duoduo-cheek"></div>
+                                    <div class="duoduo-cheek"></div>
+                                </div>
+                                <div class="duoduo-mouth"></div>
+                            </div>
+                            <div class="duoduo-suspender left"></div>
+                            <div class="duoduo-suspender right"></div>
+                            <div class="duoduo-body"></div>
+                            <div class="duoduo-shirt"></div>
+                        </div>
+                    </div>
+                    <div class="dialogue-title">
+                        <h3>🌈 多多 老师</h3>
+                        <p>输入中文，自动生成英语单词卡片</p>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-light); padding: 20px; border-radius: 18px; margin-bottom: 20px;">
+                    <h4 style="margin-bottom: 15px; color: var(--sps-blue);">📝 添加新单词</h4>
+
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 15px;">
+                        <div style="flex: 1; min-width: 200px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #666;">中文词语</label>
+                            <input type="text" id="chineseWord" placeholder="例如：苹果、汽车、小猫"
+                                style="width: 100%; padding: 14px 18px; border-radius: 15px; border: 2px solid var(--sps-blue); font-size: 16px; outline: none;"
+                                oninput="autoGenerateWord()">
+                        </div>
+                        <div style="flex: 1; min-width: 200px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #666;">选择图片</label>
+                            <div id="emojiSelector" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <!-- Emoji picker will be generated here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="autoGenHint" style="text-align: center; padding: 10px; color: var(--sps-blue); font-size: 14px; font-weight: bold;">
+                        💡 输入中文后会自动生成卡片，无需点击按钮
+                    </div>
+                </div>
+
+                <!-- Quick Emoji Picker -->
+                <div style="background: white; padding: 15px; border-radius: 18px; margin-bottom: 20px;">
+                    <h5 style="margin-bottom: 10px; color: #888;">🎨 选择图片</h5>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        ${['🍎','🍌','🍇','🍊','🥛','🍞','🍳','🧀','🍎','🍗','🍕','🍦'].map(e =>
+                          `<span onclick="selectEmoji('${e}')" style="font-size: 28px; cursor: pointer; padding: 5px; border-radius: 8px; transition: all 0.2s;"
+                           onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='transparent'">${e}</span>`
+                        ).join('')}
+                    </div>
+                    <h5 style="margin: 15px 0 10px; color: #888;">🐶 动物</h5>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        ${['🐶','🐱','🐰','🐻','🐼','🐨','🐯','🦁','🐸','🐷','🐔','🦋'].map(e =>
+                          `<span onclick="selectEmoji('${e}')" style="font-size: 28px; cursor: pointer; padding: 5px; border-radius: 8px; transition: all 0.2s;"
+                           onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='transparent'">${e}</span>`
+                        ).join('')}
+                    </div>
+                    <h5 style="margin: 15px 0 10px; color: #888;">🚗 交通</h5>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        ${['🚗','🚌','🚂','✈️','🚀','🚲','🛴','🚢','🚚','🏎️','🛶','🚜'].map(e =>
+                          `<span onclick="selectEmoji('${e}')" style="font-size: 28px; cursor: pointer; padding: 5px; border-radius: 8px; transition: all 0.2s;"
+                           onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='transparent'">${e}</span>`
+                        ).join('')}
+                    </div>
+                    <h5 style="margin: 15px 0 10px; color: #888;">😊 心情</h5>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        ${['😊','😄','🥰','😎','🤩','😴','🤗','😃','🌟','💫','🎉','💖'].map(e =>
+                          `<span onclick="selectEmoji('${e}')" style="font-size: 28px; cursor: pointer; padding: 5px; border-radius: 8px; transition: all 0.2s;"
+                           onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='transparent'">${e}</span>`
+                        ).join('')}
+                    </div>
+                </div>
+
+                <!-- Generated Word Card -->
+                <div id="generatedCard" style="display: none; background: white; border-radius: 22px; padding: 25px; text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,0.1);">
+                    <div id="generatedEmoji" style="font-size: 80px; margin-bottom: 15px;"></div>
+                    <div id="generatedChinese" style="font-size: 24px; font-weight: bold; margin-bottom: 8px;"></div>
+                    <div id="generatedEnglish" style="font-size: 32px; font-weight: bold; color: var(--sps-blue); margin-bottom: 8px;"></div>
+                    <div id="generatedPhonetic" style="font-size: 16px; color: #999; font-style: italic; margin-bottom: 20px;"></div>
+                    <button onclick="speakGeneratedWord()" style="
+                        padding: 14px 35px; background: linear-gradient(135deg, var(--sps-blue), #5DADE2);
+                        color: white; border: none; border-radius: 28px; font-size: 16px; font-weight: bold;
+                        cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                        🔊 点击朗读
+                    </button>
+                    <button onclick="addToWords()" style="
+                        padding: 14px 25px; background: var(--sps-green);
+                        color: white; border: none; border-radius: 28px; font-size: 16px; font-weight: bold;
+                        cursor: pointer; display: inline-flex; align-items: center; gap: 8px; margin-left: 10px;">
+                        ➕ 添加到单词表
+                    </button>
+                </div>
+
+                <!-- My Words List -->
+                <div style="background: white; border-radius: 22px; padding: 20px; margin-top: 20px;">
+                    <h4 style="margin-bottom: 15px; color: var(--sps-purple);">📚 我添加的单词</h4>
+                    <div id="myWordsList" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px;">
+                        <!-- Words will be listed here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialogue Tab -->
+        <div class="tab-content" id="dialogue">
+            <div class="section-title">💬 和 Carl 对话</div>
+
+            <div class="dialogue-container">
+                <div class="dialogue-header">
+                    <div class="dialogue-avatar">
+                        <div class="duoduo" style="width: 100%; height: 100%;">
+                            <div class="duoduo-hat"></div>
+                            <div class="duoduo-head">
+                                <div class="duoduo-eyes">
+                                    <div class="duoduo-eye"></div>
+                                    <div class="duoduo-eye"></div>
+                                </div>
+                                <div class="duoduo-cheeks">
+                                    <div class="duoduo-cheek"></div>
+                                    <div class="duoduo-cheek"></div>
+                                </div>
+                                <div class="duoduo-mouth"></div>
+                            </div>
+                            <div class="duoduo-suspender left"></div>
+                            <div class="duoduo-suspender right"></div>
+                            <div class="duoduo-body"></div>
+                            <div class="duoduo-shirt"></div>
+                        </div>
+                    </div>
+                    <div class="dialogue-title">
+                        <h3>🌈 多多 老师</h3>
+                        <p>点击按钮或输入想说的话～</p>
+                    </div>
+                </div>
+
+                <div class="dialogue-messages" id="dialogueMessages">
+                    <div class="message ai">
+                        <div class="message-avatar" style="background: var(--sps-blue);">
+                            <div class="duoduo" style="width: 100%; height: 100%; transform: scale(0.6); transform-origin: center;">
+                                <div class="duoduo-hat"></div>
+                                <div class="duoduo-head">
+                                    <div class="duoduo-eyes">
+                                        <div class="duoduo-eye"></div>
+                                        <div class="duoduo-eye"></div>
+                                    </div>
+                                    <div class="duoduo-cheeks">
+                                        <div class="duoduo-cheek"></div>
+                                        <div class="duoduo-cheek"></div>
+                                    </div>
+                                    <div class="duoduo-mouth"></div>
+                                </div>
+                                <div class="duoduo-suspender left"></div>
+                                <div class="duoduo-suspender right"></div>
+                                <div class="duoduo-body"></div>
+                                <div class="duoduo-shirt"></div>
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-text">
+                                Hello! I'm Carl! 👋<br>
+                                你好！我是 Carl！<br><br>
+                                让我们一起学英语吧！
+                            </div>
+                            ${generateVisualCards(mediaContent.hello.cards)}
+                            ${generateVideoRecommend(mediaContent.greeting.video)}
+                            <button class="voice-btn" onclick="speakText('Hello! I\\'m Carl! Let\\'s learn English together!')">
+                                🔊 听 Carl 说
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-replies">
+                    <button class="quick-btn" onclick="quickMessageWithMedia('Carl你好', '👋', 'hello', 'greeting')">👋 你好</button>
+                    <button class="quick-btn" onclick="quickMessageWithMedia('我想学新单词', '📚', 'words', 'words')">📚 学单词</button>
+                    <button class="quick-btn" onclick="quickMessageWithMedia('我想听歌', '🎵', 'song', 'song')">🎵 听歌</button>
+                    <button class="quick-btn" onclick="quickMessageWithMedia('和我玩', '🧸', 'play', 'play')">🧸 玩</button>
+                </div>
+
+                <div class="input-area">
+                    <input type="text" id="messageInput" placeholder="输入你想说的话..." onkeypress="handleKeyPress(event)">
+                    <button class="send-btn" onclick="sendMessage()">➤</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Tab -->
+        <div class="tab-content" id="progress">
+            <div class="section-title">🏆 学习成就</div>
+
+            <div class="progress-container">
+                <div class="progress-header">
+                    <div class="progress-title">
+                        <h3>🌟 今日之星</h3>
+                    </div>
+                    <div class="stars-container">
+                        <span class="star filled">⭐</span>
+                        <span class="star filled">⭐</span>
+                        <span class="star filled">⭐</span>
+                        <span class="star filled">⭐</span>
+                        <span class="star">⭐</span>
+                    </div>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" style="width: 68%;"></div>
+                </div>
+
+                <div class="progress-stats">
+                    <div class="stat-card">
+                        <div class="stat-value">28</div>
+                        <div class="stat-label">已学单词</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">10</div>
+                        <div class="stat-label">连续天数</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">15</div>
+                        <div class="stat-label">观看视频</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">20</div>
+                        <div class="stat-label">对话次数</div>
+                    </div>
+                </div>
+
+                <h4 style="margin-bottom: 15px; color: var(--sps-purple);">📊 分类进度</h4>
+
+                <div class="category-progress">
+                    <div class="cat-card">
+                        <div class="cat-icon">👨‍👩‍👧</div>
+                        <div class="cat-info">
+                            <div class="cat-name">家人</div>
+                            <div class="cat-bar">
+                                <div class="cat-fill easy" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <div class="cat-percent">100%</div>
+                    </div>
+
+                    <div class="cat-card">
+                        <div class="cat-icon">🍎</div>
+                        <div class="cat-info">
+                            <div class="cat-name">食物</div>
+                            <div class="cat-bar">
+                                <div class="cat-fill easy" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div class="cat-percent">85%</div>
+                    </div>
+
+                    <div class="cat-card">
+                        <div class="cat-icon">🐶</div>
+                        <div class="cat-info">
+                            <div class="cat-name">动物</div>
+                            <div class="cat-bar">
+                                <div class="cat-fill medium" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                        <div class="cat-percent">70%</div>
+                    </div>
+
+                    <div class="cat-card">
+                        <div class="cat-icon">🎵</div>
+                        <div class="cat-info">
+                            <div class="cat-name">歌曲</div>
+                            <div class="cat-bar">
+                                <div class="cat-fill medium" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                        <div class="cat-percent">60%</div>
+                    </div>
+
+                    <div class="cat-card">
+                        <div class="cat-icon">👋</div>
+                        <div class="cat-info">
+                            <div class="cat-name">动作</div>
+                            <div class="cat-bar">
+                                <div class="cat-fill medium" style="width: 55%;"></div>
+                            </div>
+                        </div>
+                        <div class="cat-percent">55%</div>
+                    </div>
+
+                    <div class="cat-card">
+                        <div class="cat-icon">🎨</div>
+                        <div class="cat-info">
+                            <div class="cat-name">颜色</div>
+                            <div class="cat-bar">
+                                <div class="cat-fill hard" style="width: 45%;"></div>
+                            </div>
+                        </div>
+                        <div class="cat-percent">45%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        🎵 多多英语乐园 · Super Simple Songs 风格 · 0-3岁英语启蒙
+    </footer>
+
+    <!-- Video Modal -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content" style="max-width: 700px; padding: 20px;">
+            <div class="modal-video">
+                <iframe id="videoPlayer" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <h3 id="videoTitle" style="margin: 15px 0 10px; color: var(--sps-blue);"></h3>
+            <button class="modal-close" onclick="closeVideoModal()" style="margin-top: 10px;">关闭视频</button>
+        </div>
+    </div>
+
+    <!-- Word Modal -->
+    <div class="modal" id="wordModal">
+        <div class="modal-content">
+            <div class="modal-image" id="modalImage">🍎</div>
+            <div class="modal-word-en" id="modalEnglish">Apple</div>
+            <div class="modal-word-cn" id="modalChinese">苹果</div>
+            <div class="modal-phonetic" id="modalPhonetic">/ˈæp.əl/</div>
+            <button class="speak-btn" onclick="speakModalWord()">
+                🔊 点击朗读
+            </button>
+            <button class="modal-close" onclick="closeModal()">关闭</button>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Show word modal
+        function showWord(en, cn, emoji, phonetic) {
+            document.getElementById('modalImage').textContent = emoji;
+            document.getElementById('modalEnglish').textContent = en;
+            document.getElementById('modalChinese').textContent = cn;
+            document.getElementById('modalPhonetic').textContent = phonetic;
+            document.getElementById('wordModal').classList.add('active');
+
+            setTimeout(() => speakWord(en), 400);
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('wordModal').classList.remove('active');
+            speechSynthesis.cancel();
+        }
+
+        // ========== Custom Word Feature ==========
+        let selectedEmoji = '🍎';
+        let generatedWordData = null;
+        let myWords = JSON.parse(localStorage.getItem('myWords') || '[]');
+
+        // Select emoji
+        function selectEmoji(emoji) {
+            selectedEmoji = emoji;
+            // Visual feedback
+            event.target.style.transform = 'scale(1.3)';
+            setTimeout(() => {
+                event.target.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        // Simple Chinese to English dictionary
+        const chineseDict = {
+            '苹果': 'Apple', '香蕉': 'Banana', '葡萄': 'Grapes', '橙子': 'Orange',
+            '牛奶': 'Milk', '面包': 'Bread', '鸡蛋': 'Egg', '奶酪': 'Cheese',
+            '水': 'Water', '肉': 'Meat', '鸡肉': 'Chicken', '披萨': 'Pizza',
+            '冰淇淋': 'Ice Cream', '薯条': 'Fries', '汉堡': 'Hamburger',
+            '小狗': 'Dog', '小猫': 'Cat', '兔子': 'Rabbit', '熊猫': 'Panda',
+            '老虎': 'Tiger', '狮子': 'Lion', '猴子': 'Monkey', '大象': 'Elephant',
+            '长颈鹿': 'Giraffe', '斑马': 'Zebra', '猪': 'Pig', '青蛙': 'Frog',
+            '蝴蝶': 'Butterfly', '鸟': 'Bird', '鱼': 'Fish', '乌龟': 'Turtle',
+            '汽车': 'Car', '公交车': 'Bus', '火车': 'Train', '飞机': 'Airplane',
+            '轮船': 'Ship', '自行车': 'Bicycle', '摩托车': 'Motorcycle',
+            '出租车': 'Taxi', '卡车': 'Truck', '救护车': 'Ambulance',
+            '妈妈': 'Mommy', '爸爸': 'Daddy', '奶奶': 'Grandma', '爷爷': 'Grandpa',
+            '宝宝': 'Baby', '朋友': 'Friend', '老师': 'Teacher', '同学': 'Classmate',
+            '书': 'Book', '笔': 'Pen', '铅笔': 'Pencil', '橡皮': 'Eraser',
+            '书包': 'Bag', '尺子': 'Ruler', '剪刀': 'Scissors', '本子': 'Notebook',
+            '学校': 'School', '教室': 'Classroom', '家': 'Home', '房间': 'Room',
+            '门': 'Door', '窗': 'Window', '桌子': 'Table', '椅子': 'Chair',
+            '床': 'Bed', '沙发': 'Sofa', '电视': 'TV', '电脑': 'Computer',
+            '太阳': 'Sun', '月亮': 'Moon', '星星': 'Star', '云': 'Cloud',
+            '雨': 'Rain', '雪': 'Snow', '风': 'Wind', '花': 'Flower',
+            '草': 'Grass', '树': 'Tree', '山': 'Mountain', '河': 'River',
+            '海': 'Sea', '沙滩': 'Beach', '房子': 'House', '城堡': 'Castle',
+            '开心': 'Happy', '难过': 'Sad', '生气': 'Angry', '害怕': 'Scared',
+            '惊讶': 'Surprised', '困了': 'Sleepy', '饿了': 'Hungry', '渴了': 'Thirsty',
+            '你好': 'Hello', '再见': 'Bye Bye', '谢谢': 'Thank You', '对不起': 'Sorry',
+            '红色': 'Red', '蓝色': 'Blue', '黄色': 'Yellow', '绿色': 'Green',
+            '紫色': 'Purple', '橙色': 'Orange', '粉色': 'Pink', '黑色': 'Black',
+            '白色': 'White', '棕色': 'Brown', '灰色': 'Gray',
+            '一': 'One', '二': 'Two', '三': 'Three', '四': 'Four',
+            '五': 'Five', '六': 'Six', '七': 'Seven', '八': 'Eight',
+            '九': 'Nine', '十': 'Ten',
+            '红色': 'Red', '蓝色': 'Blue', '黄色': 'Yellow', '绿色': 'Green'
+        };
+
+        // Generate phonetic symbols (simplified)
+        function generatePhonetic(word) {
+            const phoneticMap = {
+                'Apple': '/ˈæp.əl/', 'Banana': '/bəˈnæn.ə/', 'Grapes': '/ɡreɪps/',
+                'Orange': '/ˈɒr.ɪndʒ/', 'Milk': '/mɪlk/', 'Bread': '/bred/',
+                'Egg': '/eɡ/', 'Cheese': '/tʃiːz/', 'Water': '/ˈwɔː.tər/',
+                'Meat': '/miːt/', 'Chicken': '/ˈtʃɪk.ɪn/', 'Pizza': '/ˈpiːt.sə/',
+                'Dog': '/dɒɡ/', 'Cat': '/kæt/', 'Rabbit': '/ˈræb.ɪt/', 'Panda': '/ˈpæn.də/',
+                'Tiger': '/ˈtaɪ.ɡər/', 'Lion': '/laɪ.ən/', 'Monkey': '/ˈmʌŋ.ki/',
+                'Elephant': '/ˈel.ɪ.fənt/', 'Giraffe': '/dʒəˈrɑːf/',
+                'Car': '/kɑːr/', 'Bus': '/bʌs/', 'Train': '/treɪn/', 'Airplane': '/ˈeər.pleɪn/',
+                'Ship': '/ʃɪp/', 'Bicycle': '/ˈbaɪ.sɪ.kəl/',
+                'Mommy': '/ˈmɒm.i/', 'Daddy': '/ˈdæd.i/', 'Baby': '/ˈbeɪ.bi/',
+                'Book': '/bʊk/', 'Pen': '/pen/', 'Pencil': '/ˈpen.səl/',
+                'School': '/skuːl/', 'Home': '/həʊm/', 'Room': '/ruːm/',
+                'Table': '/ˈteɪ.bəl/', 'Chair': '/tʃeər/', 'Bed': '/bed/',
+                'Sun': '/sʌn/', 'Moon': '/muːn/', 'Star': '/stɑːr/',
+                'Flower': '/ˈflaʊ.ər/', 'Tree': '/triː/', 'Grass': '/ɡrɑːs/',
+                'Happy': '/ˈhæp.i/', 'Hello': '/həˈləʊ/', 'Bye': '/baɪ/',
+                'Red': '/red/', 'Blue': '/bluː/', 'Yellow': '/ˈjel.əʊ/', 'Green': '/ɡriːn/',
+                'One': '/wʌn/', 'Two': '/tuː/', 'Three': '/θriː/', 'Four': '/fɔːr/',
+                'Five': '/faɪv/', 'Six': '/sɪks/', 'Seven': '/ˈsev.ən/', 'Eight': '/eɪt/',
+                'Nine': '/naɪn/', 'Ten': '/ten/'
+            };
+            return phoneticMap[word] || '/' + word.toLowerCase() + '/';
+        }
+
+        // Generate word card
+        function generateWordCard() {
+            const chinese = document.getElementById('chineseWord').value.trim();
+            if (!chinese) {
+                alert('请先输入中文词语！');
+                return;
+            }
+
+            // Find English translation
+            let english = chineseDict[chinese];
+            if (!english) {
+                // Try to find partial match
+                for (let key in chineseDict) {
+                    if (chinese.includes(key) || key.includes(chinese)) {
+                        english = chineseDict[key];
+                        break;
+                    }
+                }
+            }
+
+            // If still not found, use fallback
+            if (!english) {
+                english = chinese.charAt(0) + chinese.slice(1).toLowerCase();
+            }
+
+            const phonetic = generatePhonetic(english);
+
+            // Store data
+            generatedWordData = {
+                chinese: chinese,
+                english: english,
+                phonetic: phonetic,
+                emoji: selectedEmoji
+            };
+
+            // Show card
+            document.getElementById('generatedCard').style.display = 'block';
+            document.getElementById('generatedEmoji').textContent = selectedEmoji;
+            document.getElementById('generatedChinese').textContent = chinese;
+            document.getElementById('generatedEnglish').textContent = english;
+            document.getElementById('generatedPhonetic').textContent = phonetic;
+
+            // Auto speak
+            setTimeout(() => speakGeneratedWord(), 500);
+
+            // Save to history
+            addToHistory(chinese, english, selectedEmoji);
+        }
+
+        // Speak generated word
+        function speakGeneratedWord() {
+            if (generatedWordData) {
+                speakWord(generatedWordData.english);
+            }
+        }
+
+        // Add to words list
+        function addToWords() {
+            if (!generatedWordData) return;
+
+            // Check if already exists
+            const exists = myWords.some(w => w.chinese === generatedWordData.chinese);
+            if (exists) {
+                alert('这个单词已经添加过了！');
+                return;
+            }
+
+            // Add to list
+            myWords.push(generatedWordData);
+            localStorage.setItem('myWords', JSON.stringify(myWords));
+
+            // Update display
+            renderMyWords();
+
+            // Celebration effect
+            celebrate();
+
+            alert('单词添加成功！🎉');
+        }
+
+        // Add to history
+        function addToHistory(chinese, english, emoji) {
+            const history = JSON.parse(localStorage.getItem('wordHistory') || '[]');
+            history.unshift({ chinese, english, emoji, time: new Date().toLocaleDateString() });
+            if (history.length > 50) history.pop();
+            localStorage.setItem('wordHistory', JSON.stringify(history));
+        }
+
+        // Render my words
+        function renderMyWords() {
+            const container = document.getElementById('myWordsList');
+            if (myWords.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #888; grid-column: 1/-1;">还没有添加单词，快来试试吧！</p>';
+                return;
+            }
+
+            container.innerHTML = myWords.map((w, i) => `
+                <div class="card" onclick="speakWord('${w.english}')" style="cursor: pointer;">
+                    <span class="card-icon">${w.emoji}</span>
+                    <div class="card-title">${w.chinese}</div>
+                    <div class="card-en">${w.english}</div>
+                </div>
+            `).join('');
+        }
+
+        // ========== End Custom Word Feature ==========
+
+        // Play video
+        function playVideo(title, url) {
+            document.getElementById('videoTitle').textContent = title;
+            document.getElementById('videoPlayer').src = url;
+            document.getElementById('videoModal').classList.add('active');
+        }
+
+        // Close video modal
+        function closeVideoModal() {
+            document.getElementById('videoModal').classList.remove('active');
+            document.getElementById('videoPlayer').src = '';
+        }
+
+        // Close video modal when clicking outside
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVideoModal();
+            }
+        });
+
+        // Speak word
+        function speakWord(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.75;
+            speechSynthesis.speak(utterance);
+        }
+
+        function speakModalWord() {
+            const en = document.getElementById('modalEnglish').textContent;
+            speakWord(en);
+        }
+
+        function speakText(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.85;
+            speechSynthesis.speak(utterance);
+        }
+
+        // Media content database
+        const mediaContent = {
+            apple: {
+                cards: [
+                    { emoji: '🍎', word: 'Apple', label: '苹果' },
+                    { emoji: '🍌', word: 'Banana', label: '香蕉' },
+                    { emoji: '🍇', word: 'Grapes', label: '葡萄' },
+                    { emoji: '🍊', word: 'Orange', label: '橙子' }
+                ],
+                video: { emoji: '🍎', title: 'Fruit Song', url: 'https://www.youtube.com/embed/2Y3KqZ2n5NQ' }
+            },
+            dog: {
+                cards: [
+                    { emoji: '🐶', word: 'Dog', label: '小狗' },
+                    { emoji: '🐱', word: 'Cat', label: '小猫' },
+                    { emoji: '🐰', word: 'Rabbit', label: '兔子' },
+                    { emoji: '🦁', word: 'Lion', label: '狮子' }
+                ],
+                video: { emoji: '🦁', title: 'The Lion Song', url: 'https://www.youtube.com/embed/g3t2fDn4_aQ' }
+            },
+            animal: {
+                cards: [
+                    { emoji: '🐶', word: 'Dog', label: '小狗' },
+                    { emoji: '🐱', word: 'Cat', label: '小猫' },
+                    { emoji: '🐸', word: 'Frog', label: '青蛙' },
+                    { emoji: '🐷', word: 'Pig', label: '小猪' }
+                ],
+                video: { emoji: '🦁', title: 'The Lion Song', url: 'https://www.youtube.com/embed/g3t2fDn4_aQ' }
+            },
+            song: {
+                cards: [
+                    { emoji: '🎵', word: 'Song', label: '歌曲' },
+                    { emoji: '🎶', word: 'Music', label: '音乐' },
+                    { emoji: '🎤', word: 'Sing', label: '唱歌' },
+                    { emoji: '🎹', word: 'Dance', label: '跳舞' }
+                ],
+                video: { emoji: '🎵', title: 'If You\'re Happy', url: 'https://www.youtube.com/embed/oX6D1uT9k9k' }
+            },
+            greeting: {
+                cards: [
+                    { emoji: '👋', word: 'Hello', label: '你好' },
+                    { emoji: '😊', word: 'Happy', label: '开心' },
+                    { emoji: '👋', word: 'Bye Bye', label: '再见' },
+                    { emoji: '👍', word: 'Yes', label: '好的' }
+                ],
+                video: { emoji: '👋', title: 'Hello Song', url: 'https://www.youtube.com/embed/oX6D1uT9k9k' }
+            },
+            words: {
+                cards: [
+                    { emoji: '📚', word: 'Book', label: '书' },
+                    { emoji: '✏️', word: 'Pen', label: '笔' },
+                    { emoji: '🎒', word: 'Bag', label: '书包' },
+                    { emoji: '📖', word: 'Read', label: '阅读' }
+                ],
+                video: { emoji: '🎵', title: 'ABC Song', url: 'https://www.youtube.com/embed/0VkuXAEkybk' }
+            },
+            play: {
+                cards: [
+                    { emoji: '🧸', word: 'Toy', label: '玩具' },
+                    { emoji: '⚽', word: 'Ball', label: '球' },
+                    { emoji: '🧩', word: 'Game', label: '游戏' },
+                    { emoji: '🎪', word: 'Fun', label: '有趣' }
+                ],
+                video: { emoji: '🎵', title: 'If You\'re Happy', url: 'https://www.youtube.com/embed/oX6D1uT9k9k' }
+            },
+            food: {
+                cards: [
+                    { emoji: '🍎', word: 'Apple', label: '苹果' },
+                    { emoji: '🥛', word: 'Milk', label: '牛奶' },
+                    { emoji: '🍞', word: 'Bread', label: '面包' },
+                    { emoji: '🍳', word: 'Egg', label: '鸡蛋' }
+                ],
+                video: { emoji: '🍎', title: 'Fruit Song', url: 'https://www.youtube.com/embed/2Y3KqZ2n5NQ' }
+            },
+            hello: {
+                cards: [
+                    { emoji: '👋', word: 'Hello', label: '你好' },
+                    { emoji: '😊', word: 'Happy', label: '开心' },
+                    { emoji: '🌟', word: 'Star', label: '星星' },
+                    { emoji: '🎉', word: 'Great', label: '太棒了' }
+                ],
+                video: { emoji: '☀️', title: 'Morning Song', url: 'https://www.youtube.com/embed/c2v1pVdFWIY' }
+            }
+        };
+
+        // Generate visual cards HTML
+        function generateVisualCards(cards) {
+            let html = '<div class="visual-cards">';
+            cards.forEach(card => {
+                html += `
+                    <div class="visual-card" onclick="showWord('${card.word}', '${card.label}', '${card.emoji}', '/${card.word.toLowerCase()}/')">
+                        <div class="emoji">${card.emoji}</div>
+                        <div class="word">${card.word}</div>
+                        <div class="label">${card.label}</div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            return html;
+        }
+
+        // Generate video recommendation HTML
+        function generateVideoRecommend(video) {
+            return `
+                <div class="video-recommend" onclick="playVideo('${video.title}', '${video.url}')">
+                    <div class="thumb">${video.emoji}</div>
+                    <div class="info">
+                        <div class="title">🎬 ${video.title}</div>
+                        <div class="desc">点击观看相关视频</div>
+                    </div>
+                    <div class="play-icon">▶</div>
+                </div>
+            `;
+        }
+
+        // Quick message with media
+        function quickMessageWithMedia(text, emoji, keyword, type) {
+            const messages = document.getElementById('dialogueMessages');
+
+            // User message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.innerHTML = `
+                <div class="message-avatar">👶</div>
+                <div class="message-content">
+                    <div class="message-text">${text}</div>
+                </div>
+            `;
+            messages.appendChild(userMsg);
+            messages.scrollTop = messages.scrollHeight;
+
+            // AI response with media
+            setTimeout(() => {
+                let response = getResponse(text, keyword, type);
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'message ai';
+                aiMsg.innerHTML = `
+                    <div class="message-avatar" style="background: var(--sps-blue);">
+                        <div class="duoduo" style="width: 100%; height: 100%; transform: scale(0.6); transform-origin: center;">
+                            <div class="duoduo-hat"></div>
+                            <div class="duoduo-head">
+                                <div class="duoduo-eyes">
+                                    <div class="duoduo-eye"></div>
+                                    <div class="duoduo-eye"></div>
+                                </div>
+                                <div class="duoduo-cheeks">
+                                    <div class="duoduo-cheek"></div>
+                                    <div class="duoduo-cheek"></div>
+                                </div>
+                                <div class="duoduo-mouth"></div>
+                            </div>
+                            <div class="duoduo-suspender left"></div>
+                            <div class="duoduo-suspender right"></div>
+                            <div class="duoduo-body"></div>
+                            <div class="duoduo-shirt"></div>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-text">
+                            ${response.en}<br><br>
+                            ${response.cn}
+                        </div>
+                        ${generateVisualCards(response.cards)}
+                        ${generateVideoRecommend(response.video)}
+                        <button class="voice-btn" onclick="speakText('${response.en.replace(/'/g, "\\'").replace(/\n/g, " ")}')">
+                            🔊 听 Carl 说
+                        </button>
+                    </div>
+                `;
+                messages.appendChild(aiMsg);
+                messages.scrollTop = messages.scrollHeight;
+            }, 600);
+        }
+
+        // Get response data
+        function getResponse(text, keyword, type) {
+            const appleEn = "Apple! 🍎 Yummy! Apple is delicious!";
+            const appleCn = "苹果！好吃！";
+
+            const responses = {
+                apple: {
+                    en: appleEn,
+                    cn: appleCn,
+                    cards: mediaContent.apple.cards,
+                    video: mediaContent.apple.video
+                },
+                dog: {
+                    en: "Dog! 🐶 Woof woof! Dogs are cute!",
+                    cn: "小狗！汪汪！小狗很可爱！",
+                    cards: mediaContent.dog.cards,
+                    video: mediaContent.dog.video
+                },
+                animal: {
+                    en: "Animals! 🐶🐱 Many cute animals!",
+                    cn: "动物！好多可爱的小动物！",
+                    cards: mediaContent.animal.cards,
+                    video: mediaContent.animal.video
+                },
+                song: {
+                    en: "Sing! 🎵 La la la! Let's sing together!",
+                    cn: "唱歌！啦啦啦！我们一起唱！",
+                    cards: mediaContent.song.cards,
+                    video: mediaContent.song.video
+                },
+                greeting: {
+                    en: "Hello! 👋 How are you today?",
+                    cn: "你好！今天好吗？",
+                    cards: mediaContent.greeting.cards,
+                    video: mediaContent.greeting.video
+                },
+                words: {
+                    en: "Learn! 📚 New words are fun!",
+                    cn: "学习！新单词很有趣！",
+                    cards: mediaContent.words.cards,
+                    video: mediaContent.words.video
+                },
+                play: {
+                    en: "Play! 🧸 Let's have fun together!",
+                    cn: "玩！我们一起玩！",
+                    cards: mediaContent.play.cards,
+                    video: mediaContent.play.video
+                },
+                food: {
+                    en: appleEn,
+                    cn: appleCn,
+                    cards: mediaContent.food.cards,
+                    video: mediaContent.food.video
+                },
+                hello: {
+                    en: "Hello! 👋 Good to see you!",
+                    cn: "你好！见到你真开心！",
+                    cards: mediaContent.hello.cards,
+                    video: mediaContent.hello.video
+                }
+            };
+
+            return responses[keyword] || responses.hello;
+        }
+
+        // Original quickMessage for custom input
+        function quickMessage(text) {
+            const messages = document.getElementById('dialogueMessages');
+
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.innerHTML = `
+                <div class="message-avatar">👶</div>
+                <div class="message-content">
+                    <div class="message-text">${text}</div>
+                </div>
+            `;
+            messages.appendChild(userMsg);
+            messages.scrollTop = messages.scrollHeight;
+
+            // Determine keyword from input
+            let keyword = 'hello';
+            let type = 'greeting';
+
+            if (text.includes('苹果') || text.includes('吃') || text.includes('水果')) {
+                keyword = 'apple'; type = 'food';
+            } else if (text.includes('狗') || text.includes('动物') || text.includes('小猫')) {
+                keyword = 'dog'; type = 'animal';
+            } else if (text.includes('歌') || text.includes('唱')) {
+                keyword = 'song'; type = 'song';
+            } else if (text.includes('你好') || text.includes('嗨')) {
+                keyword = 'hello'; type = 'greeting';
+            } else if (text.includes('单词') || text.includes('学') || text.includes('新')) {
+                keyword = 'words'; type = 'words';
+            } else if (text.includes('玩') || text.includes('游戏')) {
+                keyword = 'play'; type = 'play';
+            } else if (text.includes('吃') || text.includes('喝')) {
+                keyword = 'food'; type = 'food';
+            }
+
+            // AI response with media
+            setTimeout(() => {
+                let response = getResponse(text, keyword, type);
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'message ai';
+                aiMsg.innerHTML = `
+                    <div class="message-avatar" style="background: var(--sps-blue);">
+                        <div class="duoduo" style="width: 100%; height: 100%; transform: scale(0.6); transform-origin: center;">
+                            <div class="duoduo-hat"></div>
+                            <div class="duoduo-head">
+                                <div class="duoduo-eyes">
+                                    <div class="duoduo-eye"></div>
+                                    <div class="duoduo-eye"></div>
+                                </div>
+                                <div class="duoduo-cheeks">
+                                    <div class="duoduo-cheek"></div>
+                                    <div class="duoduo-cheek"></div>
+                                </div>
+                                <div class="duoduo-mouth"></div>
+                            </div>
+                            <div class="duoduo-suspender left"></div>
+                            <div class="duoduo-suspender right"></div>
+                            <div class="duoduo-body"></div>
+                            <div class="duoduo-shirt"></div>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-text">
+                            ${response.en}<br><br>
+                            ${response.cn}
+                        </div>
+                        ${generateVisualCards(response.cards)}
+                        ${generateVideoRecommend(response.video)}
+                        <button class="voice-btn" onclick="speakText('${response.en.replace(/'/g, "\\'").replace(/\n/g, " ")}')">
+                            🔊 听 Carl 说
+                        </button>
+                    </div>
+                `;
+                messages.appendChild(aiMsg);
+                messages.scrollTop = messages.scrollHeight;
+            }, 600);
+        }
+
+        // Send message
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const text = input.value.trim();
+            if (text) {
+                quickMessage(text);
+                input.value = '';
+            }
+        }
+
+        // Handle enter key
+        function handleKeyPress(event) {
+            if ( event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Celebration
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                celebrate();
+            });
+        });
+
+        // Initialize my words list
+        renderMyWords();
+
+        function renderMyWords() {
+            const container = document.getElementById('myWordsList');
+            if (!container) return;
+
+            if (myWords.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #888; grid-column: 1/-1; padding: 20px;">还没有添加单词，输入中文选择图片试试吧！</p>';
+                return;
+            }
+
+            container.innerHTML = myWords.map((w, i) => `
+                <div class="card" onclick="speakWord('${w.english}')" style="cursor: pointer;">
+                    <span class="card-icon">${w.emoji}</span>
+                    <div class="card-title">${w.chinese}</div>
+                    <div class="card-en">${w.english}</div>
+                </div>
+            `).join('');
+        }
+
+        function celebrate() {
+            const celebration = document.createElement('div');
+            celebration.className = 'celebration';
+            document.body.appendChild(celebration);
+
+            const colors = ['#FF6B6B', '#4ECDC4', '#FFD93D', '#A29BFE', '#6BCB77'];
+
+            for (let i = 0; i < 40; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 1.5 + 's';
+                celebration.appendChild(confetti);
+            }
+
+            setTimeout(() => {
+                celebration.remove();
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
